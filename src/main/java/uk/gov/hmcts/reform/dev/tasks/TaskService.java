@@ -34,8 +34,9 @@ public class TaskService {
     }
 
     public void delete(long id) {
-        if (!repo.existsById(id))
+        if (!repo.existsById(id)) {
             throw new TaskNotFoundException(id);
+        }
         repo.deleteById(id);
     }
 }
