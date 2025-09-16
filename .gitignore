@@ -12,12 +12,13 @@ bin/main/application.yaml
 .settings
 .springBeans
 
-### IntelliJ IDEA ###
+### IDE ###
 .idea
 /out
 *.iws
 *.iml
 *.ipr
+/.vscode
 
 .DS_Store
 
