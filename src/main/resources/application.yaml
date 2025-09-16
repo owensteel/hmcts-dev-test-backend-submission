@@ -26,24 +26,59 @@ spring:
     import: "optional:configtree:/mnt/secrets/test/"
   application:
     name: Dev Test
-#  datasource:
-#    driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}${DB_OPTIONS:}
-#    username: ${DB_USER_NAME}
-#    password: ${DB_PASSWORD}
-#    properties:
-#      charSet: UTF-8
-#    hikari:
-#      minimumIdle: 2
-#      maximumPoolSize: 10
-#      idleTimeout: 10000
-#      poolName: {to-be-defined}HikariCP
-#      maxLifetime: 7200000
-#      connectionTimeout: 30000
-#  jpa:
-#    properties:
-#      hibernate:
-#        jdbc:
-#          lob:
-#            # silence the 'wall-of-text' - unnecessary exception throw about blob types
-#            non_contextual_creation: true
+ datasource:
+   driver-class-name: org.postgresql.Driver
+   url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}${DB_OPTIONS:}
+   username: ${DB_USER_NAME}
+   password: ${DB_PASSWORD}
+   properties:
+     charSet: UTF-8
+   hikari:
+     minimumIdle: 2
+     maximumPoolSize: 10
+     idleTimeout: 10000
+     poolName: {to-be-defined}HikariCP
+     maxLifetime: 7200000
+     connectionTimeout: 30000
+ jpa:
+   properties:
+     hibernate:
+       jdbc:
+         lob:
+           # silence the 'wall-of-text' - unnecessary exception throw about blob types
+           non_contextual_creation: true
+
+# dev H2 config, boots instantly and requires no services
+spring:
+  datasource:
+    url: jdbc:h2:mem:tasks;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.format_sql: true
+  flyway:
+    enabled: true
+
+# running with Postgres profile
+spring:
+  config:
+    activate:
+      on-profile: postgres
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tasks
+    username: taskuser
+    password: taskpass
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+management:
+  endpoint:
+    health:
+      group:
+        readiness:
+          include: db
