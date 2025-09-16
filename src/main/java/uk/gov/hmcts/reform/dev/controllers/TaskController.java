@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import uk.gov.hmcts.reform.dev.tasks.Task;
 import uk.gov.hmcts.reform.dev.tasks.TaskService;
 import uk.gov.hmcts.reform.dev.tasks.mapper.TaskMapper;
