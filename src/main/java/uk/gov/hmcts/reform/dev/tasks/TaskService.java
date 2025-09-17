@@ -26,6 +26,10 @@ public class TaskService {
         return repo.findAll();
     }
 
+    public List<Task> getTasksForCase(Long caseId) {
+        return repo.findByCaseId(caseId);
+    }
+
     @Transactional
     public Task updateStatus(long id, TaskStatus status) {
         Task t = get(id);
