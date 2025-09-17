@@ -15,6 +15,8 @@ public class TaskService {
     }
 
     public Task create(Task t) {
+        // Default status
+        t.setStatus(TaskStatus.IN_PROGRESS);
         return repo.save(t);
     }
 
@@ -33,7 +35,7 @@ public class TaskService {
     public Task createTaskForCase(Long caseId, Task newTask) {
         // TODO: check if case actually exists
         newTask.setCaseId(caseId);
-        return repo.save(newTask);
+        return create(newTask);
     }
 
     @Transactional
