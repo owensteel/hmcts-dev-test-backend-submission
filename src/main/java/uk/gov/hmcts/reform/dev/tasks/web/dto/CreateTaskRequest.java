@@ -8,8 +8,9 @@ import jakarta.validation.constraints.NotBlank;
 import uk.gov.hmcts.reform.dev.tasks.TaskStatus;
 
 public record CreateTaskRequest(
-                @NotBlank String title,
-                String description,
-                @NotNull TaskStatus status,
-                @NotNull @FutureOrPresent OffsetDateTime dueDateTime) {
+        @NotBlank String title,
+        String description,
+        @NotNull TaskStatus status,
+        @NotNull @FutureOrPresent OffsetDateTime dueDateTime,
+        @NotNull Long caseId) {
 }

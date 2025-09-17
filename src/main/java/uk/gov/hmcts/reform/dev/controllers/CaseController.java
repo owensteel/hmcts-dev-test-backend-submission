@@ -3,12 +3,17 @@ package uk.gov.hmcts.reform.dev.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.hmcts.reform.dev.models.ExampleCase;
 import uk.gov.hmcts.reform.dev.tasks.Task;
 import uk.gov.hmcts.reform.dev.tasks.TaskService;
+import uk.gov.hmcts.reform.dev.tasks.mapper.TaskMapper;
+import uk.gov.hmcts.reform.dev.tasks.web.dto.TaskResponse;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -38,5 +43,11 @@ public class CaseController {
     @GetMapping("/{caseId}/tasks")
     public List<Task> getTasksForCase(@PathVariable Long caseId) {
         return taskService.getTasksForCase(caseId);
+    }
+
+    @PostMapping("/{caseId}/tasks")
+    public ResponseEntity<TaskResponse> createTask(@PathVariable Long caseId, @RequestBody Task newTask) {
+        Task task = taskService.createTaskForCase(caseId, newTask);
+        return ResponseEntity.created(URI.create(("/api/tasks/" + task.getId()))).body(TaskMapper.toResponse(task));
     }
 }

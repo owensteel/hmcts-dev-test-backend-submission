@@ -43,11 +43,12 @@ public class Task {
     public Task() {
     }
 
-    public Task(String title, String description, TaskStatus status, OffsetDateTime dueDateTime) {
+    public Task(String title, String description, TaskStatus status, OffsetDateTime dueDateTime, Long caseId) {
         this.title = title;
         this.description = description;
         this.status = status;
         this.dueDateTime = dueDateTime;
+        this.caseId = caseId;
     }
 
     public Long getId() {
@@ -88,5 +89,9 @@ public class Task {
 
     public Long getCaseId() {
         return caseId;
+    }
+
+    public void setCaseId(Long v) {
+        caseId = v;
     }
 }

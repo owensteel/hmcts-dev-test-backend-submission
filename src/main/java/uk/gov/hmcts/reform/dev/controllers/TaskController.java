@@ -33,7 +33,7 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<TaskResponse> create(@Validated @RequestBody CreateTaskRequest req) {
         Task saved = service.create(
-                new Task(req.title(), req.description(), req.status(), req.dueDateTime()));
+                new Task(req.title(), req.description(), req.status(), req.dueDateTime(), req.caseId()));
         return ResponseEntity.created(URI.create(("/api/tasks/" + saved.getId()))).body(TaskMapper.toResponse(saved));
     }
 

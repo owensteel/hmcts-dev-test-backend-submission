@@ -30,6 +30,12 @@ public class TaskService {
         return repo.findByCaseId(caseId);
     }
 
+    public Task createTaskForCase(Long caseId, Task newTask) {
+        // TODO: check if case actually exists
+        newTask.setCaseId(caseId);
+        return repo.save(newTask);
+    }
+
     @Transactional
     public Task updateStatus(long id, TaskStatus status) {
         Task t = get(id);
