@@ -36,6 +36,10 @@ public class Task {
     @Column(name = "due_at", nullable = false)
     private OffsetDateTime dueDateTime;
 
+    @NotNull
+    @Column(name = "case_id", nullable = false)
+    private Long caseId;
+
     public Task() {
     }
 
@@ -80,5 +84,9 @@ public class Task {
 
     public void setDueDateTime(OffsetDateTime v) {
         dueDateTime = v;
+    }
+
+    public Long getCaseId() {
+        return caseId;
     }
 }

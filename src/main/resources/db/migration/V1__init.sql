@@ -4,7 +4,8 @@ CREATE TABLE
         title VARCHAR(120) NOT NULL,
         description TEXT,
         status VARCHAR(20) NOT NULL,
-        due_at TIMESTAMPTZ NOT NULL
+        due_at TIMESTAMPTZ NOT NULL,
+        case_id BIGINT NOT NULL -- REFERENCES cases(id) would be here if we had a Cases table
     );
 
 CREATE INDEX IF NOT EXISTS idx_tasks_status ON tasks (status);
