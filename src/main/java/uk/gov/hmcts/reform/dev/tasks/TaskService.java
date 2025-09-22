@@ -15,8 +15,6 @@ public class TaskService {
     }
 
     public Task create(Task t) {
-        // Default status
-        t.setStatus(TaskStatus.IN_PROGRESS);
         return repo.save(t);
     }
 
