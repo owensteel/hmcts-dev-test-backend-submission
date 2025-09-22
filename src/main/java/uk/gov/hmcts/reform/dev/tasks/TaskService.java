@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import uk.gov.hmcts.reform.dev.tasks.web.dto.TaskUpdateRequest;
 
