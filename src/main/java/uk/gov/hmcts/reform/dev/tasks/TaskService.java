@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import uk.gov.hmcts.reform.dev.tasks.web.dto.TaskUpdateRequest;
 
 @Service
 public class TaskService {
@@ -36,17 +38,34 @@ public class TaskService {
         return create(newTask);
     }
 
-    @Transactional
-    public Task updateStatus(long id, TaskStatus status) {
-        Task t = get(id);
-        t.setStatus(status);
-        return t; // JPA dirty checking persists
-    }
-
     public void delete(long id) {
         if (!repo.existsById(id)) {
             throw new TaskNotFoundException(id);
         }
         repo.deleteById(id);
+    }
+
+    @Transactional
+    public Task updateTask(Long taskId, TaskUpdateRequest updateRequest) {
+        if (!repo.existsById(taskId)) {
+            throw new TaskNotFoundException(taskId);
+        }
+
+        Task task = repo.getReferenceById(taskId);
+
+        if (updateRequest.getTitle() != null) {
+            task.setTitle(updateRequest.getTitle());
+        }
+        if (updateRequest.getDescription() != null) {
+            task.setDescription(updateRequest.getDescription());
+        }
+        if (updateRequest.getStatus() != null) {
+            task.setStatus(updateRequest.getStatus());
+        }
+        if (updateRequest.getDueDateTime() != null) {
+            task.setDueDateTime(updateRequest.getDueDateTime());
+        }
+
+        return repo.save(task);
     }
 }
