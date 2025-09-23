@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.gov.hmcts.reform.dev.models.ExampleCase;
 import uk.gov.hmcts.reform.dev.tasks.Task;
 import uk.gov.hmcts.reform.dev.tasks.TaskService;
+import uk.gov.hmcts.reform.dev.tasks.TaskStatus;
 import uk.gov.hmcts.reform.dev.tasks.mapper.TaskMapper;
 import uk.gov.hmcts.reform.dev.tasks.web.dto.TaskResponse;
 
@@ -50,12 +51,18 @@ public class CaseController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "dueDateTime") String sortBy,
-            @RequestParam(defaultValue = "asc") String direction) {
+            @RequestParam(defaultValue = "asc") String direction,
+            @RequestParam(defaultValue = "ANY") String statusFilter) {
         Sort sort = direction.equalsIgnoreCase("desc")
                 ? Sort.by(sortBy).descending()
                 : Sort.by(sortBy).ascending();
+        try {
+            TaskStatus status = TaskStatus.valueOf(statusFilter);
+            return taskService.getTasksByCaseIdAndStatus(caseId, status, PageRequest.of(page, size, sort));
+        } catch (Exception e) {
+            return taskService.getTasksByCaseId(caseId, PageRequest.of(page, size, sort));
+        }
 
-        return taskService.getTasksByCaseId(caseId, PageRequest.of(page, size, sort));
     }
 
     @PostMapping("/{caseId}/tasks")

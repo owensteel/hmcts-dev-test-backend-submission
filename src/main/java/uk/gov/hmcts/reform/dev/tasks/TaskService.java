@@ -33,6 +33,10 @@ public class TaskService {
         return repo.findByCaseId(caseId, pageable);
     }
 
+    public Page<Task> getTasksByCaseIdAndStatus(Long caseId, TaskStatus status, Pageable pageable) {
+        return repo.findByCaseIdAndStatus(caseId, status, pageable);
+    }
+
     public Task createTaskForCase(Long caseId, Task newTask) {
         // TODO: check if case actually exists
         newTask.setCaseId(caseId);

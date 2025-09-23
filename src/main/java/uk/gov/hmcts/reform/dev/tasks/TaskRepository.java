@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
     Page<Task> findByCaseId(Long caseId, Pageable pageable);
+
+    Page<Task> findByCaseIdAndStatus(Long caseId, TaskStatus status, Pageable pageable);
 }
