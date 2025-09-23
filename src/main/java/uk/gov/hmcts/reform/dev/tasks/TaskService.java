@@ -2,6 +2,8 @@ package uk.gov.hmcts.reform.dev.tasks;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -27,8 +29,8 @@ public class TaskService {
         return repo.findAll();
     }
 
-    public List<Task> getTasksForCase(Long caseId) {
-        return repo.findByCaseId(caseId);
+    public Page<Task> getTasksByCaseId(Long caseId, Pageable pageable) {
+        return repo.findByCaseId(caseId, pageable);
     }
 
     public Task createTaskForCase(Long caseId, Task newTask) {
