@@ -51,6 +51,10 @@ public class Task {
         this.caseId = caseId;
     }
 
+    public Long setId() {
+        return id;
+    }
+
     public Long getId() {
         return id;
     }
