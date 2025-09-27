@@ -20,8 +20,6 @@ import uk.gov.hmcts.reform.dev.tasks.web.dto.TaskResponse;
 
 import java.net.URI;
 import java.time.LocalDateTime;
-import java.util.List;
-
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
