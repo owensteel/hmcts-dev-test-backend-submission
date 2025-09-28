@@ -9,6 +9,8 @@ Run `./gradlew bootRun` to start the service.
 I have followed the Spring Boot tech stack, and implemented controllers and models for the Case and Tasks. The endpoints allow the frontend to fetch, create, and update tasks, in a strict environment.
 Extra computational functions, like sorting and filtering tasks, are also handled by this backend for the benefit of the frontend. The backend also serves as a single source of truth for standards like the task statuses.
 
+The backend connects to a local PostgreSQL database, named "mojdevtest". The migration/DB structure setup SQL is at `src/main/resources/db/migration/V1__init.sql`. Since this is just a prototype, the username and password are just "taskuser" and "taskpass" respectively.
+
 For testing, I have implemented unit tests of the controllers. These can be run from VS Code, or alongside a build with `./gradlew build`.
 
 # API Documentation
