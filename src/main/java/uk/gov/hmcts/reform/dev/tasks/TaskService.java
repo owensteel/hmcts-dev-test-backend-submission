@@ -38,7 +38,6 @@ public class TaskService {
     }
 
     public Task createTaskForCase(Long caseId, Task newTask) {
-        // TODO: check if case actually exists
         newTask.setCaseId(caseId);
         return create(newTask);
     }
